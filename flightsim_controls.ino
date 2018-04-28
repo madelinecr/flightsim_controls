@@ -1,21 +1,25 @@
 #include <Joystick.h>
 
-int gameButton1 = 2;
-int pin1 = 2;
+int input_switches[] = {2, 3, 4, 5, 6, 7, 8, 9};
+int input_switches_count = 8;
+
+
 
 void setup() {
-  // put your setup code here, to run once:
-  pinMode(pin1, INPUT);
-  Serial.begin(9600);
+  // Set all input pins to INPUT mode
+  for(int i = 0; i < input_switches_count; i++) {
+    pinMode(input_switches[i], INPUT);
+  }
+
+  // Start joystick library
   Joystick.begin(true);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
-  int val = digitalRead(pin1);
-
-  Joystick.setButton(gameButton1, val);
-  Serial.print(val);
-  delay(500);
+  // For every input pin, check if it's on, and if so toggle
+  // the corresponding index-based joystick button
+  for(int i = 0; i < input_switches_count; i++) {
+    int val = digitalRead(input_switches[i]);
+    Joystick.setButton(i, val);
+  }
 }
