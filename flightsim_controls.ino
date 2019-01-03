@@ -3,7 +3,7 @@
 int input_switches[] = {2, 3, 4, 5, 6, 7, 8, 9};
 int input_switches_count = 8;
 
-
+Joystick_ Joystick;
 
 void setup() {
   // Set all input pins to INPUT mode
